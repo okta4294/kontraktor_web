@@ -21,7 +21,7 @@ const PORT = Number(process.env.PORT) || 3000;
 
 export const app = new Elysia()
   .use(
-    cors({
+    process.env.VERCEL ? (app: any) => app : cors({
       origin: true,
       credentials: true,
     })
