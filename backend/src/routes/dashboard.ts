@@ -98,14 +98,14 @@ export const dashboardRoutes = new Elysia({ prefix: "/dashboard" })
       success: true,
       data: {
         widgets: {
-          totalAlatBerat: Number(totalAlat[0]?.count || 0),
-          alatBekerjaHariIni: Number(alatBekerja[0]?.count || 0),
-          stokSolar: Number(solarIn[0]?.total || 0) - Number(solarOut[0]?.total || 0),
-          solarMasukHariIni: Number(solarInToday[0]?.total || 0),
-          solarKeluarHariIni: Number(solarOutToday[0]?.total || 0),
-          totalPembelianBulanIni: Number(pembelianBulanIni[0]?.total || 0),
-          totalMaterial: Number(totalMaterial[0]?.count || 0),
-          totalPeralatan: Number(totalPeralatan[0]?.count || 0),
+          totalAlatBerat: Number(totalAlat?.count || 0),
+          alatBekerjaHariIni: Number(alatBekerja?.count || 0),
+          stokSolar: Number(solarIn?.total || 0) - Number(solarOut?.total || 0),
+          solarMasukHariIni: Number(solarInToday?.total || 0),
+          solarKeluarHariIni: Number(solarOutToday?.total || 0),
+          totalPembelianBulanIni: Number(pembelianBulanIni?.total || 0),
+          totalMaterial: Number(totalMaterial?.count || 0),
+          totalPeralatan: Number(totalPeralatan?.count || 0),
         },
         grafik: {
           pembelianBulanan: grafikPembelian,
