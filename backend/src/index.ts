@@ -19,7 +19,7 @@ import { dashboardRoutes } from "./routes/dashboard";
 
 const PORT = Number(process.env.PORT) || 3000;
 
-const app = new Elysia()
+export const app = new Elysia()
   .use(
     cors({
       origin: process.env.FRONTEND_URL || "http://localhost:5173",
