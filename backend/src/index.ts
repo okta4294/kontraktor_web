@@ -23,7 +23,7 @@ const apiPrefix = process.env.VERCEL ? "" : "/api";
 
 export const app = new Elysia()
   .use(
-    process.env.VERCEL ? (app: any) => app : cors({
+    process.env.VERCEL ? (app: any) => app.options("*", () => new Response(null, { status: 200 })) : cors({
       origin: true,
       credentials: true,
     })
