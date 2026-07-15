@@ -14,6 +14,7 @@
     "@elysiajs/bearer": "^1.4.4",
     "@elysiajs/cors": "^1.4.2",
     "@elysiajs/jwt": "^1.4.2",
+    "bcryptjs": "^3.0.3",
     "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
     "elysia": "latest",
@@ -21,9 +22,9 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
     "bun-types": "latest",
-    "drizzle-kit": "^0.31.10",
-    "vercel-bun": "^0.0.1-alpha.5"
+    "drizzle-kit": "^0.31.10"
   },
   "module": "src/index.js"
 }

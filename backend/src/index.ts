@@ -58,9 +58,12 @@ const app = new Elysia()
     console.error(error);
     set.status = 500;
     return { success: false, message: "Internal server error" };
-  })
-  .listen(PORT);
+  });
 
-console.log(`🚀 Server running at http://localhost:${PORT}`);
+// Only listen if not running in Vercel Serverless
+if (typeof Bun !== "undefined" && !process.env.VERCEL) {
+  app.listen(PORT);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+}
 
 export type App = typeof app;

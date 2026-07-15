@@ -3,6 +3,7 @@ import { db } from "../db";
 import { users } from "../db/schema";
 import { eq } from "drizzle-orm";
 import jwt from "@elysiajs/jwt";
+import bcrypt from "bcryptjs";
 
 export const authRoutes = new Elysia({ prefix: "/auth" })
   .use(
@@ -26,7 +27,7 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
         return { success: false, message: "Email atau password salah" };
       }
 
-      const valid = await Bun.password.verify(password, user.passwordHash);
+      const valid = await bcrypt.compare(password, user.passwordHash);
       if (!valid) {
         set.status = 401;
         return { success: false, message: "Email atau password salah" };
@@ -102,7 +103,7 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
         return { success: false, message: "Email sudah terdaftar" };
       }
 
-      const passwordHash = await Bun.password.hash(password);
+      const passwordHash = await bcrypt.hash(password, 10);
       
       const [newUser] = await db.insert(users).values({
         nama,
