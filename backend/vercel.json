@@ -1,12 +1,6 @@
 {
   "version": 2,
   "bunVersion": "1.x",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/api/index.ts"
-    }
-  ],
   "headers": [
     {
       "source": "/api/(.*)",

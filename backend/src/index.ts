@@ -19,6 +19,8 @@ import { dashboardRoutes } from "./routes/dashboard";
 
 const PORT = Number(process.env.PORT) || 3000;
 
+const apiPrefix = process.env.VERCEL ? "" : "/api";
+
 export const app = new Elysia()
   .use(
     process.env.VERCEL ? (app: any) => app : cors({
@@ -29,8 +31,8 @@ export const app = new Elysia()
   .use(bearer())
   // Health check
   .get("/", () => ({ status: "ok", message: "Kontraktor API v1.0" }))
-  // Mount all routes under /api
-  .group("/api", (app) =>
+  // Mount all routes
+  .group(apiPrefix, (app) =>
     app
       .use(authRoutes)
       .use(usersRoutes)
