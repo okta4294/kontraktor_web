@@ -19,7 +19,7 @@ import { dashboardRoutes } from "./routes/dashboard";
 
 const PORT = Number(process.env.PORT) || 3000;
 
-const apiPrefix = process.env.VERCEL ? "" : "/api";
+const apiPrefix = "/api";
 
 export const app = new Elysia()
   .use(
