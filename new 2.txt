@@ -1,0 +1,2 @@
+supabase pw : x6m9BHyaBPinFUzb
+name : riza_web
