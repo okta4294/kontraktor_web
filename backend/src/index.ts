@@ -67,3 +67,5 @@ if (typeof Bun !== "undefined" && !process.env.VERCEL) {
 }
 
 export type App = typeof app;
+
+export default app;
