@@ -2,11 +2,14 @@ import "dotenv/config";
 import { db } from "./index";
 import { users, projects } from "./schema";
 
+import bcrypt from "bcryptjs";
+
 async function seed() {
   console.log("🌱 Seeding database...");
 
   // Create default admin
-  const passwordHash = await Bun.password.hash("admin123");
+  const salt = await bcrypt.genSalt(10);
+  const passwordHash = await bcrypt.hash("admin123", salt);
   const [adminUser] = await db
     .insert(users)
     .values({
