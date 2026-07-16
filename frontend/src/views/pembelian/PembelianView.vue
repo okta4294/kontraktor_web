@@ -253,7 +253,13 @@ function viewDetail(item: any) {
 async function save() {
   saving.value = true
   try {
-    const payload = { ...form.value, projectId: projectStore.currentProject?.id }
+    const payload: any = { ...form.value, projectId: projectStore.currentProject?.id }
+    
+    // Clean up empty strings for optional fields
+    if (payload.supplierId === '') delete payload.supplierId;
+    if (payload.noPo === '') delete payload.noPo;
+    if (payload.keterangan === '') delete payload.keterangan;
+
     await pembelianApi.create(payload)
     toast.success('Pembelian berhasil disimpan')
     showModal.value = false

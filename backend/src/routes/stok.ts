@@ -26,14 +26,14 @@ export const stokRoutes = new Elysia({ prefix: "/stok" })
       allBarang.map(async (b) => {
         // Total dibeli (dari pembelian_item join pembelian)
         const [beli] = await db
-          .select({ total: sql<string>`COALESCE(SUM(pi.jumlah), 0)` })
+          .select({ total: sql<string>`COALESCE(SUM(${pembelianItem.jumlah}), 0)` })
           .from(pembelianItem)
           .innerJoin(pembelian, eq(pembelianItem.pembelianId, pembelian.id))
           .where(and(eq(pembelianItem.barangId, b.id), eq(pembelian.projectId, pid)));
 
         // Total dipakai
         const [pakai] = await db
-          .select({ total: sql<string>`COALESCE(SUM(jumlah), 0)` })
+          .select({ total: sql<string>`COALESCE(SUM(${pemakaianBarang.jumlah}), 0)` })
           .from(pemakaianBarang)
           .where(and(eq(pemakaianBarang.barangId, b.id), eq(pemakaianBarang.projectId, pid)));
 
@@ -43,7 +43,7 @@ export const stokRoutes = new Elysia({ prefix: "/stok" })
             ? await db
                 .select({
                   kondisi: pemakaianBarang.kondisi,
-                  total: sql<string>`COALESCE(SUM(jumlah), 0)`,
+                  total: sql<string>`COALESCE(SUM(${pemakaianBarang.jumlah}), 0)`,
                 })
                 .from(pemakaianBarang)
                 .where(and(eq(pemakaianBarang.barangId, b.id), eq(pemakaianBarang.projectId, pid)))

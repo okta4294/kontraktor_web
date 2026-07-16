@@ -231,7 +231,18 @@ function openModal(type: 'masuk' | 'keluar') {
 async function save() {
   saving.value = true
   try {
-    const payload = { ...form.value, projectId: projectStore.currentProject?.id }
+    const payload: any = { ...form.value, projectId: projectStore.currentProject?.id }
+    
+    // Clean up empty strings for optional fields and convert number to string
+    if (payload.supplierId === '') delete payload.supplierId;
+    if (payload.alatBeratId === '') delete payload.alatBeratId;
+    if (payload.harga === '') delete payload.harga;
+    if (payload.noDo === '') delete payload.noDo;
+    if (payload.operator === '') delete payload.operator;
+    if (payload.keterangan === '') delete payload.keterangan;
+    if (payload.jam === '') delete payload.jam;
+    if (payload.jumlahLiter !== null) payload.jumlahLiter = String(payload.jumlahLiter);
+
     if (modalType.value === 'masuk') {
       await solarApi.createMasuk(payload)
     } else {

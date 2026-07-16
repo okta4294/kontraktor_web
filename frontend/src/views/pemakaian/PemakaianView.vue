@@ -175,7 +175,14 @@ function onBarangChange() {
 async function save() {
   saving.value = true
   try {
-    const payload = { ...form.value, projectId: projectStore.currentProject?.id }
+    const payload: any = { ...form.value, projectId: projectStore.currentProject?.id }
+    
+    // Clean up empty strings for optional fields
+    if (payload.barangId === '') delete payload.barangId;
+    if (payload.kondisi === '') delete payload.kondisi;
+    if (payload.lokasi === '') delete payload.lokasi;
+    if (payload.keterangan === '') delete payload.keterangan;
+
     if (editing.value) {
       await pemakaianApi.update(editing.value.id, payload)
       toast.success('Data diperbarui')

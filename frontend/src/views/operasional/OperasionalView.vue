@@ -217,7 +217,14 @@ function openModal(item?: any) {
 async function save() {
   saving.value = true
   try {
-    const payload = { ...form.value, projectId: projectStore.currentProject?.id }
+    const payload: any = { ...form.value, projectId: projectStore.currentProject?.id }
+    
+    // Clean up empty strings for optional fields
+    if (payload.alatBeratId === '') delete payload.alatBeratId;
+    if (payload.jamTroubleMulai === '') delete payload.jamTroubleMulai;
+    if (payload.jamTroubleSelesai === '') delete payload.jamTroubleSelesai;
+    if (payload.solarLiter === null || payload.solarLiter === '') delete payload.solarLiter;
+
     if (editing.value) {
       await operasionalApi.update(editing.value.id, payload)
       toast.success('Data operasional diperbarui')
